@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDodgerBlue">#2592f2</color>
+    <color name="colorPrimaryAlienArmpit">#7fe600</color>
+    <color name="colorSecondaryEbony">#020207</color>
+    <color name="colorSecondaryShuttleGray">#53616f</color>
+    <color name="colorSecondaryAlabaster">#fcfcfc</color>
+    <color name="colorSecondaryMariner">#1f72d1</color>
+    <color name="colorSecondaryMalibu">#64b2f6</color>
+    <color name="colorSecondaryAtlantis">#71cb2e</color>
+</resources>

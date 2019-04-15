@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">android</string>
+    <string name="invalid_login_text">User Information is Invalid</string>
+    <string name="username_edit_text_hint">UserName</string>
+    <string name="password_edit_text_hint">Password</string>
+    <string name="submit_edit_text_hint">Submit</string>
+    <string name="login_button_text">Login</string>
+    <string name="hard_coded_username">myusername</string>
+    <string name="hard_coded_password">MyPassword</string>
+
+
+
+</resources>

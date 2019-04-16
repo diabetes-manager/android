@@ -1,5 +1,8 @@
 package com.example.android;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,85 +13,93 @@ import java.net.URL;
 import java.util.Map;
 
 public class NetworkAdapter {
+    public static final String GET = "GET";
+    public static final String POST = "POST";
+    public static final String PUT = "PUT";
+    public static final String DELETE = "DELETE";
+    public static final int TIMEOUT = 3000;
 
-    public static final int CONNECT_TIMEOUT = 3000;
-    public static final int READ_TIMEOUT = 3000;
-
-    static String httpRequest(String urlString) {
-        return httpRequest(urlString, null);
-    }
-
-    // S03M02-3 Build method to work with http requests
-    static String httpRequest(String urlString, Map<String, String> headerProperties) {
-        // add objects for later use
+    public static String httpRequest(String stringUrl, String requestType){
         String result = "";
-        InputStream inputStream = null;
+        InputStream stream = null;
         HttpURLConnection connection = null;
-
         try {
-            // convert our string url into a url object
-            URL url = new URL(urlString);
-            // create our connection object
+            URL url = new URL(stringUrl);
             connection = (HttpURLConnection) url.openConnection();
-            // set timeout
-            connection.setConnectTimeout(CONNECT_TIMEOUT);
-            connection.setReadTimeout(READ_TIMEOUT);
-
-            // optional to support apis with header requirements
-            // S02M02-9 add support for header properties
-            if(headerProperties != null) {
-                for(Map.Entry<String, String> entry: headerProperties.entrySet()) {
-                    connection.setRequestProperty(entry.getKey(), entry.getValue());
-                }
+            connection.setReadTimeout(TIMEOUT);
+            connection.setConnectTimeout(TIMEOUT);
+            connection.setRequestMethod(requestType);
+            if(requestType.equals(GET)){
+                connection.connect();
             }
-
-            // executes the connection
-            connection.connect();
-
-            // process the response
-            final int responseCode = connection.getResponseCode();
-            if(responseCode == HttpURLConnection.HTTP_OK) { // checks if we have a good response
-                inputStream = connection.getInputStream();
-                if(inputStream != null) {
-                    // build reader object to read from the stream
-                    InputStreamReader isReader = new InputStreamReader(inputStream);
-                    BufferedReader reader = new BufferedReader(isReader);
-                    StringBuilder builder = new StringBuilder();
-
-                    // reading from the stream into a string
-                    String line = reader.readLine();
-                    while(line != null) {
-                        builder.append(line);
-                        line = reader.readLine();
+            if(connection.getResponseCode() == HttpURLConnection.HTTP_OK){
+                stream = connection.getInputStream();
+                if(stream != null){
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+                    StringBuilder sb = new StringBuilder();
+                    String line;
+                    while((line = reader.readLine()) != null){
+                        sb.append(line);
                     }
-                    result = builder.toString();
+                    result = sb.toString();
                 }
-            } else {
-                throw new IOException();
             }
-        } catch (MalformedURLException e) {
+        }catch (MalformedURLException e) {
             e.printStackTrace();
-            result = "MalformedUrl";
-        } catch (IOException e) {
+            result = e.getMessage();
+        }catch (IOException e) {
             e.printStackTrace();
-            result = "IOException";
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            // cleanup
-            if(inputStream != null) {
+            result = e.getMessage();
+        }finally {
+            if(connection != null){
+                connection.disconnect();
+            }
+            if(stream != null){
                 try {
-                    inputStream.close();
+                    stream.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
+        }
+        return result;
 
-            if(connection != null) {
+    }
+
+    public static Bitmap httpImageRequest(String urlString){
+        Bitmap image = null;
+        InputStream stream = null;
+        HttpURLConnection connection = null;
+        try{
+            URL url = new URL(urlString);
+            connection = (HttpURLConnection) url.openConnection();
+            connection.setReadTimeout(TIMEOUT);
+            connection.setConnectTimeout(TIMEOUT);
+            connection.connect();
+            int responseCode = connection.getResponseCode();
+            if(responseCode == HttpURLConnection.HTTP_OK){
+                stream = connection.getInputStream();
+                if(stream != null){
+                    image = BitmapFactory.decodeStream(stream);
+                }
+            }else{
+                throw new IOException("HTTP Error code: " + responseCode);
+            }
+        }catch (IOException e){
+            e.printStackTrace();
+        }finally {
+            if(stream != null){
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(connection != null){
                 connection.disconnect();
             }
         }
-        return result;
+        return image;
     }
-}
 
+}

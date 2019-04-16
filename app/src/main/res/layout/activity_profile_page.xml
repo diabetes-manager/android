@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSecondaryMariner"
     tools:context=".ProfilePage">
 
     <com.jjoe64.graphview.GraphView
@@ -30,5 +29,42 @@
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/profile_info_target_high"
+        android:text="Target High: 200"
+        android:backgroundTint="@color/colorSecondaryAtlantis"
+        android:layout_width="wrap_content"
+        android:clickable="false"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/glucose_graph"
+        />
+    <Button
+        android:id="@+id/profile_info_target_low"
+        android:text="Target Low: 100 "
+        android:backgroundTint="@color/colorSecondaryAtlantis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_target_high"
+        />
+    <Button
+        android:id="@+id/profile_info_average"
+        android:text="Average BGL: 115"
+        android:backgroundTint="@color/colorSecondaryAtlantis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_target_low"
+        />
+
+
+
+
+
+
+
 
 </android.support.constraint.ConstraintLayout>

@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent login = new Intent(context, LoginPage.class);
                 startActivity(login);
             }
+            
         });
     }
 }

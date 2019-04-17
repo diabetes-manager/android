@@ -5,18 +5,37 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class User implements Serializable {
+    public static final int DEFAULT_USER_HEIGHT = 65;
+    public static final int DEFAULT_USER_WEIGHT = 168;
+
     int id,glucoseHigh,glucoseLow, targetGlucoseHigh,targetGlucoseLow,userWeight,userHeight,carbInsulin;
     long birthDate;
     String name,gender;
-    int[] bloodSugarArray;
+    ArrayList<Integer> bloodSugarArray;
+//    ArrayList<Integer> bloodSugarTimestamp;
 
     public User(int id) {
         this.id = id;
     }
 
-//    {"id":1,"username":"Patient Zero","bg_high":7,"bg_low":3,"bg_target_top":7,"bg_target_bottom":3,"height":null,"weight":null,"age":null,"gender":null,"carb_insulin":null}
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public ArrayList<Integer> getBloodSugarArray() {
+        return bloodSugarArray;
+    }
+
+
+    //    {"id":1,"username":"Patient Zero","bg_high":7,"bg_low":3,"bg_target_top":7,"bg_target_bottom":3,"height":null,"weight":null,"age":null,"gender":null,"carb_insulin":null}
     public User(JSONObject jsonObject){
         try {
             this.id = jsonObject.getInt("id");
@@ -50,11 +69,17 @@ public class User implements Serializable {
         }
         try {
             this.userHeight = jsonObject.getInt("height");
+            if(this.userHeight == 0){
+                this.userHeight = DEFAULT_USER_HEIGHT;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
         try {
             this.userWeight = jsonObject.getInt("weight");
+            if(this.userWeight == 0){
+                this.userWeight = DEFAULT_USER_WEIGHT;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -70,12 +95,20 @@ public class User implements Serializable {
         }
         try {
             JSONArray jsonLevels = jsonObject.getJSONArray("bloodsugarById");
-            this.bloodSugarArray = new int[jsonLevels.length()];
+           ArrayList<Integer>tempArray = new ArrayList<>();
+//            ArrayList<Integer>tempTimestamp = new ArrayList<>();
             for(int i = 0; i < jsonLevels.length(); i++){
                 JSONObject levelsJSONObject = jsonLevels.getJSONObject(i);
                 int value = levelsJSONObject.getInt("value");
-                this.bloodSugarArray[i] = value;
+//                int time = levelsJSONObject.getInt("timestamp");
+                tempArray.add(value);
+//                tempTimestamp.add(time);
+
+
+
             }
+            this.bloodSugarArray = tempArray;
+//            this.bloodSugarTimestamp = tempTimestamp;
 
 
 

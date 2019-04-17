@@ -15,6 +15,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 public class ProfilePage extends AppCompatActivity {
@@ -23,6 +24,8 @@ public class ProfilePage extends AppCompatActivity {
     GraphView glucoseGraph;
     User mockUser;
     Button targetHighDisplay,targetLowDisplay,averageDisplay;
+    public static final int TARGET_HIGH = 140;
+    public static final int TARGET_LOW = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,52 +42,56 @@ public class ProfilePage extends AppCompatActivity {
         targetHighDisplay = findViewById(R.id.profile_info_target_high);
         infoTextView = findViewById(R.id.profile_info_navigation);
         infoTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+
         glucoseGraph = findViewById(R.id.glucose_graph);
+
         glucoseGraph.getViewport().setYAxisBoundsManual(true);
-        glucoseGraph.getViewport().setMaxY(mockUser.getTargetGlucoseHigh()+30);
-        glucoseGraph.getViewport().setMinY(40);
+        glucoseGraph.getViewport().setMaxY(175);
+        glucoseGraph.getViewport().setMinY(TARGET_LOW);
         glucoseGraph.getViewport().setScalable(true);
         glucoseGraph.getViewport().setXAxisBoundsManual(true);
         glucoseGraph.getViewport().setMinX(0);
-        glucoseGraph.getViewport().setMaxX(24);
-
+        glucoseGraph.getViewport().setMaxX(30);
         glucoseGraph.getGridLabelRenderer().setHighlightZeroLines(true);
         glucoseGraph.getGridLabelRenderer().setVerticalAxisTitle("Glucose Level");
-        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("Time");
-        targetHighDisplay.setText("Target High: "+mockUser.getTargetGlucoseHigh());
-        targetLowDisplay.setText("Target Low:  "+mockUser.getTargetGlucoseLow());
+        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("History (Days)");
+        targetHighDisplay.setText("Target High: " + TARGET_HIGH);
+        targetLowDisplay.setText("Target Low:  "+TARGET_LOW);
 
 
 
-        LineGraphSeries targetGlucoseLow = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0,mockUser.getGlucoseLow()),
-                new DataPoint(24,mockUser.getGlucoseLow()),
+        PointsGraphSeries targetGlucoseLow = new PointsGraphSeries<>();
+        targetGlucoseLow.setSize(5);
+        for(int i = 0;i  < mockUser.bloodSugarArray.size();i++){
+            DataPoint newDataPoint = new DataPoint((i),mockUser.bloodSugarArray.get(i));
+            targetGlucoseLow.appendData(newDataPoint,true,mockUser.bloodSugarArray.size());
 
-        });
-        targetGlucoseLow.setTitle("Glucose Level");
-        targetGlucoseLow.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
-//        targetGlucose.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
+        }
+
+
+
+//        Date date = Date.valueOf("2019-02-01T04:48:48Z");
+        targetGlucoseLow.setTitle("Glucose Level" );
         glucoseGraph.addSeries(targetGlucoseLow);
 
         LineGraphSeries targetGlucoseHigh = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0,mockUser.getTargetGlucoseHigh()),
-                new DataPoint(24,mockUser.getTargetGlucoseHigh()),
+                new DataPoint(0,140),
+                new DataPoint(145,140),
 
         });
         targetGlucoseHigh.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
 
-//        targetGlucose.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
         glucoseGraph.addSeries(targetGlucoseHigh);
 
 
 
         LineGraphSeries targetSeries = new LineGraphSeries<>(new DataPoint[]{
-                new DataPoint(0, 110),
-                new DataPoint(1, 103),
-                new DataPoint(2, 101),
-                new DataPoint(3, 89)
+                new DataPoint(0, 80),
+                new DataPoint(145, 80),
+
 
         });
+        targetSeries.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
         glucoseGraph.addSeries(targetSeries);
         infoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,5 +103,7 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
     }
+
+
 
 }

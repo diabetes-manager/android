@@ -32,7 +32,13 @@ public class UserInformationPage extends AppCompatActivity {
         final Intent saveIntent = new Intent(context, ProfilePage.class);
         userInformationName.setText(prefillUser.name);
         userInformationUsername.setText(String.valueOf(prefillUser.id));
+        if(prefillUser.userWeight == 0){
+            prefillUser.setUserWeight(User.DEFAULT_USER_WEIGHT);
+        }
         userInformationWeight.setText(String.valueOf(prefillUser.userWeight));
+        if(prefillUser.userHeight == 0){
+            prefillUser.setUserHeight(User.DEFAULT_USER_HEIGHT);
+        }
         userInformationHeight.setText(String.valueOf(prefillUser.userHeight));
 
         userInformationSaveButton.setOnClickListener(new View.OnClickListener() {

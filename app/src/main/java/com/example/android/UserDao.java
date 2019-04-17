@@ -26,11 +26,6 @@ public class UserDao {
     }
     public ArrayList<JsonObject> getInsulinArray(String url) {
         //TODO: grab and unwrap json array  and add to insulinArray
-
-
-
-
-
         return insulinArray;
     }
 

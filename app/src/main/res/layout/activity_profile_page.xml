@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="96dp"
         android:clickable="true"
         android:text="Info"
         android:textSize="20sp"
@@ -52,6 +52,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/glucose_graph" />
 
+    <TextView
+        android:id="@+id/logout_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:text="Logout"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_info_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <Button
         android:id="@+id/profile_info_average"
         android:layout_width="wrap_content"
@@ -69,14 +83,5 @@
         app:layout_constraintTop_toBottomOf="@id/profile_info_average">
 
     </android.support.v7.widget.RecyclerView>
-
-
-
-
-
-
-
-
-
 
 </android.support.constraint.ConstraintLayout>

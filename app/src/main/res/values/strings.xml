@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android</string>
+    <string name="app_name">Diabetes Manager</string>
     <string name="invalid_login_text">User Information is Invalid</string>
     <string name="username_edit_text_hint">UserName</string>
     <string name="password_edit_text_hint">Password</string>

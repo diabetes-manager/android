@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class ProfilePage extends AppCompatActivity {
     Context context;
-    TextView infoTextView;
+    TextView infoTextView, logoutTextView;
     GraphView glucoseGraph;
     User mockUser;
     Button targetHighDisplay, targetLowDisplay, averageDisplay;
@@ -48,9 +48,16 @@ public class ProfilePage extends AppCompatActivity {
         infoTextView = findViewById(R.id.profile_info_navigation);
         infoTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         glucoseGraph = findViewById(R.id.glucose_graph);
+        logoutTextView = findViewById(R.id.logout_text);
 //calling method to fill out the ui
         getUser();
-
+        logoutTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent logoutIntent = new Intent(context, LoginPage.class);
+                startActivity(logoutIntent);
+            }
+        });
     }
 
     private void getUser() {
@@ -73,7 +80,7 @@ public class ProfilePage extends AppCompatActivity {
                         glucoseGraph.getViewport().setMaxX(25);
                         glucoseGraph.getGridLabelRenderer().setHighlightZeroLines(true);
                         glucoseGraph.getGridLabelRenderer().setVerticalAxisTitle("Glucose Level");
-                        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("Past Readings");
+                        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("History");
 
 //setting the 3 displays with target high,low, and average
                         targetHighDisplay.setText("Target High: " + TARGET_HIGH);
@@ -87,7 +94,8 @@ public class ProfilePage extends AppCompatActivity {
                         DataPoint newDataPoint = new DataPoint((i),tempReading.reading);
                         readingSeries.appendData(newDataPoint,true,mockUser.bloodSugarArray.size());
                     }
-                        readingSeries.setTitle("Glucose Level");
+                    readingSeries.setSize(7);
+                    readingSeries.setTitle("Glucose Level");
                         glucoseGraph.addSeries(readingSeries);
 //drawing line for top threshold and adding to graph
                         LineGraphSeries targetGlucoseHigh = new LineGraphSeries<>(new DataPoint[]{
@@ -116,7 +124,7 @@ public class ProfilePage extends AppCompatActivity {
 //todo: put users info into intent to autofill user information page
 //                                userInformation.putExtra("targetHigh", TARGET_HIGH );
 //                                userInformation.putExtra("targetLow",TARGET_LOW);
-
+                                userInformation.putExtra("name",mockUser.name);
                                 startActivity(userInformation);
                             }
                         });

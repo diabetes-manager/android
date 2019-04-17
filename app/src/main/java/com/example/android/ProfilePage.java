@@ -15,6 +15,8 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.util.ArrayList;
+
 public class ProfilePage extends AppCompatActivity {
     Context context;
     TextView infoTextView;
@@ -38,38 +40,51 @@ public class ProfilePage extends AppCompatActivity {
         infoTextView = findViewById(R.id.profile_info_navigation);
         infoTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
         glucoseGraph = findViewById(R.id.glucose_graph);
-       glucoseGraph.getViewport().setYAxisBoundsManual(true);
-        glucoseGraph.getViewport().setMaxY(140);
+        glucoseGraph.getViewport().setYAxisBoundsManual(true);
+        glucoseGraph.getViewport().setMaxY(mockUser.getTargetGlucoseHigh()+30);
         glucoseGraph.getViewport().setMinY(40);
+        glucoseGraph.getViewport().setScalable(true);
+        glucoseGraph.getViewport().setXAxisBoundsManual(true);
+        glucoseGraph.getViewport().setMinX(0);
+        glucoseGraph.getViewport().setMaxX(24);
 
+        glucoseGraph.getGridLabelRenderer().setHighlightZeroLines(true);
         glucoseGraph.getGridLabelRenderer().setVerticalAxisTitle("Glucose Level");
-        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("Day #");
+        glucoseGraph.getGridLabelRenderer().setHorizontalAxisTitle("Time");
         targetHighDisplay.setText("Target High: "+mockUser.getTargetGlucoseHigh());
         targetLowDisplay.setText("Target Low:  "+mockUser.getTargetGlucoseLow());
 
 
 
-        BarGraphSeries targetGlucose = new BarGraphSeries(new DataPoint[]{
-                new DataPoint(0,mockUser.getGlucoseHigh()),
+        LineGraphSeries targetGlucoseLow = new LineGraphSeries<>(new DataPoint[]{
                 new DataPoint(0,mockUser.getGlucoseLow()),
-                new DataPoint(1,mockUser.getGlucoseHigh()),
-                new DataPoint(1,mockUser.getGlucoseLow()),
-                new DataPoint(2,mockUser.getGlucoseHigh()),
-                new DataPoint(2,mockUser.getGlucoseLow()),
-                new DataPoint(3,mockUser.getGlucoseHigh()),
-                new DataPoint(3,mockUser.getGlucoseLow()),
+                new DataPoint(24,mockUser.getGlucoseLow()),
 
         });
-        targetGlucose.setTitle("Glucose Level");
-        targetGlucose.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
+        targetGlucoseLow.setTitle("Glucose Level");
+        targetGlucoseLow.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
 //        targetGlucose.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
-        glucoseGraph.addSeries(targetGlucose);
+        glucoseGraph.addSeries(targetGlucoseLow);
+
+        LineGraphSeries targetGlucoseHigh = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(0,mockUser.getTargetGlucoseHigh()),
+                new DataPoint(24,mockUser.getTargetGlucoseHigh()),
+
+        });
+        targetGlucoseHigh.setColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
+
+//        targetGlucose.setBackgroundColor(getResources().getColor(R.color.colorPrimaryAlienArmpit));
+        glucoseGraph.addSeries(targetGlucoseHigh);
 
 
 
-        PointsGraphSeries targetSeries = new PointsGraphSeries(new DataPoint[]{
-           new DataPoint(0,mockUser.getTargetGlucoseHigh()),
-           new DataPoint(1,mockUser.getTargetGlucoseLow())});
+        LineGraphSeries targetSeries = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(0, 110),
+                new DataPoint(1, 103),
+                new DataPoint(2, 101),
+                new DataPoint(3, 89)
+
+        });
         glucoseGraph.addSeries(targetSeries);
         infoTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,4 +96,5 @@ public class ProfilePage extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -16,6 +16,7 @@ public class UserInformationPage extends AppCompatActivity {
     Context context;
     Button userInformationSaveButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,29 +28,9 @@ public class UserInformationPage extends AppCompatActivity {
         userInformationName = findViewById(R.id.user_information_page_name);
         userInformationSaveButton = findViewById(R.id.user_information_save_button);
         context = this;
-        Intent prefillIntent = getIntent();
-        final User prefillUser = (User) prefillIntent.getSerializableExtra("user");
-        final Intent saveIntent = new Intent(context, ProfilePage.class);
-        userInformationName.setText(prefillUser.name);
-        userInformationUsername.setText(String.valueOf(prefillUser.id));
-        if(prefillUser.userWeight == 0){
-            prefillUser.setUserWeight(User.DEFAULT_USER_WEIGHT);
-        }
-        userInformationWeight.setText(String.valueOf(prefillUser.userWeight));
-        if(prefillUser.userHeight == 0){
-            prefillUser.setUserHeight(User.DEFAULT_USER_HEIGHT);
-        }
-        userInformationHeight.setText(String.valueOf(prefillUser.userHeight));
+        userInformationWeight.setText(User.DEFAULT_USER_WEIGHT);
+        userInformationHeight.setText(User.DEFAULT_USER_HEIGHT);
 
-        userInformationSaveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int userSavedHeight = Integer.parseInt(userInformationHeight.getText().toString());
-                prefillUser.setUserHeight(userSavedHeight);
-                prefillUser.setUserWeight(Integer.parseInt(userInformationWeight.getText().toString()));
-                saveIntent.putExtra("user",prefillUser);
-                startActivity(saveIntent);
-            }
-        });
+
     }
 }

@@ -91,11 +91,31 @@
         android:id="@+id/user_information_user_height"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:gravity="center"
         android:hint="height"
         android:inputType="number"
-        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/height_textview"
         app:layout_constraintStart_toEndOf="@+id/height_textview"
-        app:layout_constraintTop_toTopOf="@+id/height_textview" />
+        app:layout_constraintTop_toTopOf="@+id/height_textview"
+        app:layout_constraintVertical_bias="0.076" />
+
+    <TextView
+        android:id="@+id/text_view_target_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Target High: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/height_textview" />
+
+    <EditText
+        android:id="@+id/target_high_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:hint="target high"
+        app:layout_constraintStart_toEndOf="@id/text_view_target_top"
+        app:layout_constraintTop_toBottomOf="@id/user_information_user_height" />
 
 </android.support.constraint.ConstraintLayout>

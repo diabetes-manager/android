@@ -37,22 +37,10 @@ public class LoginPage extends AppCompatActivity {
                 if(userNameInput.equals(getResources().getString(R.string.hard_coded_username)) && userPasswordInput.equals(getResources().getString(R.string.hard_coded_password))){
                     //TODO: get info from database and send to profilePage to populate.
                     final Intent successfulLogin = new Intent(context, ProfilePage.class);
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final User user = UserDao.getNewUser();
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    successfulLogin.putExtra("user", user);
-                                    startActivity(successfulLogin);
-                                }
-                            });
-
-                        }
-                    }).start();
+                    startActivity(successfulLogin);
                 }else{
                     invalidTextView.setVisibility(View.VISIBLE);
+                    //temp code to speed login
 
                 }
 

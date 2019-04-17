@@ -1,5 +1,7 @@
 package com.example.android;
 
+import android.support.annotation.RequiresPermission;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,14 +11,13 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class User implements Serializable {
-    public static final int DEFAULT_USER_HEIGHT = 65;
-    public static final int DEFAULT_USER_WEIGHT = 168;
+    public static  int DEFAULT_USER_HEIGHT = 65;
+    public static  int DEFAULT_USER_WEIGHT = 168;
 
     int id,glucoseHigh,glucoseLow, targetGlucoseHigh,targetGlucoseLow,userWeight,userHeight,carbInsulin;
     long birthDate;
     String name,gender;
-    ArrayList<Integer> bloodSugarArray;
-//    ArrayList<Integer> bloodSugarTimestamp;
+    ArrayList<Reading> bloodSugarArray;
 
     public User(int id) {
         this.id = id;
@@ -30,8 +31,11 @@ public class User implements Serializable {
         this.gender = gender;
     }
 
-    public ArrayList<Integer> getBloodSugarArray() {
+    public ArrayList<Reading> getBloodSugarArray() {
         return bloodSugarArray;
+    }
+    public void setBloodSugarArray(ArrayList<Reading> arrayList){
+        this.bloodSugarArray = arrayList;
     }
 
 
@@ -95,20 +99,19 @@ public class User implements Serializable {
         }
         try {
             JSONArray jsonLevels = jsonObject.getJSONArray("bloodsugarById");
-           ArrayList<Integer>tempArray = new ArrayList<>();
-//            ArrayList<Integer>tempTimestamp = new ArrayList<>();
+           ArrayList<Reading>tempArray = new ArrayList<>();
             for(int i = 0; i < jsonLevels.length(); i++){
                 JSONObject levelsJSONObject = jsonLevels.getJSONObject(i);
                 int value = levelsJSONObject.getInt("value");
-//                int time = levelsJSONObject.getInt("timestamp");
-                tempArray.add(value);
-//                tempTimestamp.add(time);
+                String time = levelsJSONObject.getString("timestamp");
+                Reading tempReading = new Reading(value,time);
+                tempArray.add(tempReading);
+
 
 
 
             }
             this.bloodSugarArray = tempArray;
-//            this.bloodSugarTimestamp = tempTimestamp;
 
 
 
@@ -210,4 +213,5 @@ public class User implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
 }

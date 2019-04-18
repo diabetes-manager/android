@@ -130,9 +130,12 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         }).start();
+//formatting date to enhance visual appearance
+
 
 
 
     }
+
 
 }

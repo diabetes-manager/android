@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class UserDao {
-    private static final String REQUEST_STRING = "https://arcane-woodland-11613.herokuapp.com/api/users/mobile/1";
+    private static final String REQUEST_STRING = "https://glucose-iq.herokuapp.com/api/users/mobile/1";
     ArrayList<JsonObject> insulinArray = new ArrayList<>(); //called by getInsulinArray(String url)
     ArrayList<Integer> bloodSugarArray = new ArrayList<>();
 

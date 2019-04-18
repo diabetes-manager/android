@@ -4,31 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorSecondaryMariner"
     tools:context=".ProfilePage">
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/glucose_graph"
         android:layout_width="match_parent"
         android:layout_height="200dip"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.067" />
 
     <TextView
         android:id="@+id/profile_info_navigation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="4dp"
+        android:layout_marginEnd="96dp"
         android:clickable="true"
         android:text="Info"
-        android:textSize="25sp"
+        android:textSize="20sp"
+        android:textColor="@color/colorPrimaryDodgerBlue"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/profile_info_target_high"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:backgroundTint="@color/colorPrimaryDodgerBlue"
+        android:clickable="false"
+        android:text="Target High: 200"
+        app:layout_constraintStart_toEndOf="@+id/profile_info_target_low"
+        app:layout_constraintTop_toBottomOf="@id/glucose_graph" />
+
+    <Button
+        android:id="@+id/profile_info_target_low"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:backgroundTint="@color/colorPrimaryDodgerBlue"
+        android:clickable="false"
+        android:text="Target Low: 100 "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/glucose_graph" />
+
+    <TextView
+        android:id="@+id/logout_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:text="Logout"
+        android:textSize="20sp"
+        android:textColor="@android:color/holo_red_dark"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_info_navigation"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/profile_info_average"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="144dp"
+        android:backgroundTint="@color/colorPrimaryDodgerBlue"
+        android:clickable="false"
+        android:text="Average BGL: 115"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_target_low" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/profile_info_average">
+
+    </android.support.v7.widget.RecyclerView>
 
 </android.support.constraint.ConstraintLayout>

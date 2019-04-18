@@ -5,8 +5,8 @@
     <string name="password_edit_text_hint">Password</string>
     <string name="submit_edit_text_hint">Submit</string>
     <string name="login_button_text">Login</string>
-    <string name="hard_coded_username">m</string>
-    <string name="hard_coded_password">m</string>
+    <string name="hard_coded_username">patientzero</string>
+    <string name="hard_coded_password">PatientZero</string>
 
 
 </resources>

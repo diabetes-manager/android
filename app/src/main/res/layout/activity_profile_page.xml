@@ -37,6 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/colorPrimaryDodgerBlue"
+        android:textColor="#fff"
         android:clickable="false"
         android:text="Target High: 200"
         app:layout_constraintStart_toEndOf="@+id/profile_info_target_low"
@@ -48,6 +49,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="68dp"
         android:backgroundTint="@color/colorPrimaryDodgerBlue"
+        android:textColor="#fff"
+
         android:clickable="false"
         android:text="Target Low: 100 "
         app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +76,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
+        android:textColor="#fff"
+
         android:backgroundTint="@color/colorPrimaryDodgerBlue"
         android:clickable="false"
         android:text="Average BGL: 115"

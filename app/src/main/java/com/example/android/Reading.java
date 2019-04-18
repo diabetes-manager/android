@@ -6,7 +6,7 @@ public class Reading {
 
     public Reading(int reading, String time) {
         this.reading = reading;
-        this.time = time;
+        this.time =  time.replace("T", " ").replace("Z", "");
     }
 
     public int getReading() {
@@ -18,6 +18,8 @@ public class Reading {
     }
 
     public String getTime() {
+
+
         return time;
     }
 

@@ -37,8 +37,6 @@ public class ProfilePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_page);
         context = this;
-//receiving updates from the info page
-        Intent receiveUserUpdates = getIntent();
 
 
 //attaching handles
@@ -121,7 +119,6 @@ public class ProfilePage extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Intent userInformation = new Intent(context, UserInformationPage.class);
-//todo: put users info into intent to autofill user information page
 //                                userInformation.putExtra("targetHigh", TARGET_HIGH );
 //                                userInformation.putExtra("targetLow",TARGET_LOW);
                                 userInformation.putExtra("name",mockUser.name);
@@ -133,9 +130,12 @@ public class ProfilePage extends AppCompatActivity {
 
             }
         }).start();
+//formatting date to enhance visual appearance
+
 
 
 
     }
+
 
 }

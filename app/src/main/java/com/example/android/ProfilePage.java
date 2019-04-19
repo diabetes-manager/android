@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,7 +24,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 public class ProfilePage extends AppCompatActivity {
-    Context context;
+     public static Context context;
     TextView infoTextView, logoutTextView;
     GraphView glucoseGraph;
     User mockUser;
@@ -111,6 +113,9 @@ public class ProfilePage extends AppCompatActivity {
 //made list adapter and added to recyclerview
                         readingListAdapter = new ListAdapter(mockUser.bloodSugarArray);
                         RecyclerView recyclerView = findViewById(R.id.recycler_view);
+
+
+
                         recyclerView.setAdapter(readingListAdapter);
                         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
                         recyclerView.setLayoutManager(layoutManager);

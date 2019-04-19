@@ -56,20 +56,18 @@
 
     <EditText
         android:id="@+id/user_information_user_weight"
-        android:layout_width="wrap_content"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:hint="Weight"
         android:inputType="number"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="@+id/weight_textview"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toEndOf="@+id/weight_textview"
         app:layout_constraintTop_toTopOf="@+id/weight_textview"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/user_information_save_button"
@@ -97,18 +95,14 @@
 
     <EditText
         android:id="@+id/user_information_user_height"
-        android:layout_width="wrap_content"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:gravity="center"
-        android:hint="height"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/height_textview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toEndOf="@+id/height_textview"
-        app:layout_constraintTop_toTopOf="@+id/height_textview" />
+        app:layout_constraintEnd_toEndOf="@+id/user_information_user_weight"
+        app:layout_constraintTop_toTopOf="@+id/height_textview"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/text_view_target_top"
@@ -121,16 +115,13 @@
 
     <EditText
         android:id="@+id/target_high_edit_text"
-        android:layout_width="wrap_content"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:hint="target high"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_target_top"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toEndOf="@id/text_view_target_top"
-        app:layout_constraintTop_toTopOf="@+id/text_view_target_top" />
+        app:layout_constraintEnd_toEndOf="@+id/user_information_user_height"
+        app:layout_constraintTop_toTopOf="@+id/text_view_target_top"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/text_view_target_bottom"
@@ -143,17 +134,13 @@
 
     <EditText
         android:id="@+id/target_low_edit_text"
-        android:layout_width="wrap_content"
+        android:layout_width="50sp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:hint="target low"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="@+id/text_view_target_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.486"
-        app:layout_constraintStart_toEndOf="@+id/text_view_target_bottom"
-        app:layout_constraintTop_toTopOf="@+id/text_view_target_bottom" />
+        app:layout_constraintEnd_toEndOf="@+id/target_high_edit_text"
+        app:layout_constraintTop_toTopOf="@+id/text_view_target_bottom"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

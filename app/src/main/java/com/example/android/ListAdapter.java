@@ -1,19 +1,22 @@
 package com.example.android;
 
 //TODO: STEPS 11+ ARE ON MAIN ACTIVITY (OR WHICHEVER ACTIVITY YOU WANT TO HAVE THE LIST)
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SampleViewHolder> {
-
-
     ArrayList<Reading> entryData;
+    int lastPosition = -1;
+
 
 
 
@@ -31,23 +34,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SampleViewHold
 
     @Override
     //bind an element from our list of data to the provided viewholder
-    public void onBindViewHolder(@NonNull SampleViewHolder sampleViewHolder, int i) {
+    public void onBindViewHolder(@NonNull  SampleViewHolder sampleViewHolder,  int i) {
 //TODO: 10:) bind the data from the object to the views.
         Reading data = entryData.get(i);
         sampleViewHolder.entryNumberView.setText(String.valueOf(i));
         sampleViewHolder.entryTimeView.setText(String.valueOf(data.getTime()));
         sampleViewHolder.entryReadingView.setText(String.valueOf(data.getReading()));
         //reiterate all this through the object to place your items (image,names,id, etc.)
-        sampleViewHolder.parentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent sampleIntent = new Intent(v.getContext(),MainActivity.class);
-                //..............
-                v.getContext().startActivity(sampleIntent);// can also use startActivityForResult(intent,requestCode)
-                //^ to start an intent from an onclick from outside of an activity.
-
-            }
-        });
+        setEnterAnimation(sampleViewHolder.parentView,i);
     }
 
     @Override
@@ -58,8 +52,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SampleViewHold
     //our connection to the views in the layout
     class SampleViewHolder extends RecyclerView.ViewHolder{
 
-        TextView entryNumberView, entryTimeView,entryReadingView,entryNumberTextView,entryTimeTextView,entryReadingTextView;
-        View parentView;
+        final TextView entryNumberView, entryTimeView,entryReadingView,entryNumberTextView,entryTimeTextView,entryReadingTextView;
+       final View parentView;
         //bind the datamembers of our viewholder to the items in the layout
         public SampleViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -72,4 +66,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.SampleViewHold
             entryReadingTextView = itemView.findViewById(R.id.textView2);
         }
     }
+private void setEnterAnimation(View viewToAnimate, int position){
+        if(position > lastPosition){
+            Animation animation = AnimationUtils.loadAnimation(viewToAnimate.getContext(),android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+}
 }
